@@ -1,19 +1,29 @@
 <template>
   <h1>{{ name }}</h1>
+  <input type="text" v-model="name" />
   <button @click="placeOrder">Place Order</button>
   <YummyMeal name="Hamburger 🍔" :price="5" @addToCart="addItemToCart" />
 </template>
 
 <script>
 import YummyMeal from "./components/YummyMeal.vue";
+import { ref } from "vue";
 export default {
   components: { YummyMeal },
   setup() {
-    const name = "The Snazzy Burger";
+    console.log('setup')
+    const name = ref("The Snazzy Burger");
     const placeOrder = () => alert("Your order has been placed!");
     const addItemToCart = (item) => alert(`One ${item} add to the cart`);
-    return { name, placeOrder, addItemToCart };
+
+    console.log(name)
+    return { placeOrder, addItemToCart };
   },
+
+  created() {
+    this.name = "Hello created name"
+    console.log("created", this.name);
+  }
 };
 </script>
 
